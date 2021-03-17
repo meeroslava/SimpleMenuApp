@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>{{ restaurant.name }}</h1>
+  <h2>{{ restaurant.menu.name }}</h2>
+
+  <table mat-table [dataSource]="restaurant.menu.details">
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>price</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dish">
+      <th mat-header-cell *matHeaderCellDef>dish</th>
+      <td mat-cell *matCellDef="let element">{{ element.dish }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <button mat-flat-button routerLink="./edit" color="primary">Edit</button>
+</div>
