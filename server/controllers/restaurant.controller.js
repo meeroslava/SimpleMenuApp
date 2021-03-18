@@ -1,7 +1,6 @@
 const Restaurant = require("../models/restaurant.model");
 
 exports.get = function (req, res) {
-  console.log(req.params.id);
   Restaurant.findById(req.params.id)
     .then(function (restaurant) {
       return res.status(200).json(restaurant);
@@ -26,4 +25,27 @@ exports.list = function (req, res) {
         message: err.message,
       });
     });
+};
+
+exports.update = function (req, res) {
+  const params = JSON.parse(JSON.stringify(req.body));
+  console.log("params", params);
+  Restaurant.findByIdAndUpdate(
+    req.params.id,
+    { menu: params },
+    { new: true },
+    function (err, results) {
+      console.log("Err", err);
+      console.log("results", results);
+    }
+  );
+  // .then(function (restaurants) {
+  //   return res.json({ success: true });
+  // })
+  // .catch(function (err) {
+  //   return res.status(400).json({
+  //     status: 400,
+  //     message: err.message,
+  //   });
+  // });
 };

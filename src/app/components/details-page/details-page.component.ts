@@ -9,6 +9,7 @@ import Restaurant from '../../models/restaurant.model';
   styleUrls: ['./details-page.component.css'],
 })
 export class DetailsPageComponent implements OnInit {
+  isLoading: boolean = false;
   isAdmin: boolean;
   restaurant!: Restaurant;
   displayedColumns: string[] = ['dish', 'price'];
@@ -28,10 +29,12 @@ export class DetailsPageComponent implements OnInit {
     });
 
     //get restaurant by id
+    this.isLoading = true;
     this.restaSvc
       .getRestaurantById(restaurantId)
       .subscribe((restaurant: Restaurant) => {
         this.restaurant = restaurant;
+        this.isLoading = false;
       });
   }
 }

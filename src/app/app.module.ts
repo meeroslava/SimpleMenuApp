@@ -20,6 +20,7 @@ import { EditPageComponent } from './components/edit-page/edit-page.component';
 import { RestaurantService } from './services/restaurant.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'rxjs';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   {
     path: ':id/edit',
     component: EditPageComponent,
+    canActivate: [AuthGuardGuard],
   },
 ];
 

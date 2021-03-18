@@ -8,10 +8,13 @@ import Restaurant from '../../models/restaurant.model';
   styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent implements OnInit {
+  public error: string | null = null;
   restaurantsList!: Restaurant[];
   constructor(public restaSvc: RestaurantService) {}
 
   ngOnInit() {
+    this.error = localStorage.getItem('error');
+    localStorage.removeItem('error');
     this.restaSvc.getRestaurants().subscribe((restaurants) => {
       this.restaurantsList = restaurants;
     });

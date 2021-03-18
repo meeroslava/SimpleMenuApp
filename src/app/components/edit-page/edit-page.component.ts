@@ -53,4 +53,15 @@ export class EditPageComponent implements OnInit {
   get details(): FormArray {
     return this.editForm.get('details') as FormArray;
   }
+
+  onFormSubmit(): void {
+    if (this.editForm.valid) {
+      this.restaSvc
+        .updateRestaurant(
+          this.route.snapshot.params['id'],
+          this.editForm.getRawValue()
+        )
+        .subscribe((response) => console.log(response));
+    }
+  }
 }

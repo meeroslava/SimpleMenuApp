@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import Restaurant from '../models/restaurant.model';
 
@@ -14,15 +14,18 @@ export class RestaurantService {
   constructor(private http: HttpClient) {}
 
   public getRestaurants(): Observable<Restaurant[]> {
-    return this.http
-      .get(this.restaUrl)
-      .pipe(map((response) => response as Restaurant[]));
+    return this.http.get<Restaurant[]>(this.restaUrl);
   }
 
   public getRestaurantById(id: string): Observable<Restaurant> {
     //console.log(id);
+    return this.http.get<Restaurant>(`${this.restaUrl}/${id}`);
+  }
+
+  public updateRestaurant(id: string, data: any): Observable<any> {
+    console.log(arguments);
     return this.http
-      .get(`${this.restaUrl}/${id}`)
-      .pipe(map((response) => response as Restaurant));
+      .post(`${this.restaUrl}/${id}/post`, data)
+      .pipe(tap((x: any) => console.log(x)));
   }
 }

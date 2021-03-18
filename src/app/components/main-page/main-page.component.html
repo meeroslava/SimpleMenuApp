@@ -1,6 +1,10 @@
+<div class="alert" *ngIf="!!error">
+  {{ error }}
+</div>
 <mat-selection-list [multiple]="false">
   <mat-list-option
     [routerLink]="['/' + restaurant._id]"
+    queryParamsHandling="merge"
     *ngFor="let restaurant of restaurantsList"
   >
     {{ restaurant.name }}
