@@ -1,5 +1,20 @@
-<form>
-  <h1>BRUH</h1>
-  <h1>{{ restaurant.menu.name }}</h1>
-  <input matInput class="menuName" [value]="restaurant.menu.details.dish" />
+<form [formGroup]="editForm">
+  <mat-form-field>
+    <input class="menuName" matInput formControlName="name" />
+  </mat-form-field>
+  <div
+    class="dish"
+    formArrayName="details"
+    *ngFor="let detail of details.controls; let i = index"
+  >
+    <div formGroupName="{{ i }}">
+      <mat-form-field>
+        <input matInput formControlName="dish"
+      /></mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="price"
+      /></mat-form-field>
+    </div>
+  </div>
+  <button mat-flat-button color="primary">Submit</button>
 </form>
