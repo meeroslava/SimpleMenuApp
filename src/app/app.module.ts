@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     MatListModule,
     MatIconModule,
     MatInputModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
   ],
   providers: [RestaurantService],

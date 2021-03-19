@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RestaurantService } from '../../services/restaurant.service';
 import Restaurant from '../../models/restaurant.model';
 
@@ -19,8 +20,10 @@ export class EditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public restaSvc: RestaurantService,
-    public formBuild: FormBuilder
+    public formBuild: FormBuilder,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +39,8 @@ export class EditPageComponent implements OnInit {
         this.editForm.setControl('details', detailsArr); //append details array to form
       });
   }
+
+  //fill array of menu details
   setDetails(restaurant: Restaurant): FormArray {
     const formArray = new FormArray([]);
     restaurant.menu.details.forEach((detail) => {
@@ -46,22 +51,30 @@ export class EditPageComponent implements OnInit {
         })
       );
     });
-    console.log(formArray);
     return formArray;
   }
 
+  //menu details for to show in form
   get details(): FormArray {
     return this.editForm.get('details') as FormArray;
   }
 
   onFormSubmit(): void {
     if (this.editForm.valid) {
+      {
+      }
       this.restaSvc
         .updateRestaurant(
           this.route.snapshot.params['id'],
           this.editForm.getRawValue()
         )
-        .subscribe((response) => console.log(response));
+        .subscribe((result) => console.log(result.status));
+
+      this.snackBar.open('Form submitted', 'Yay', {
+        verticalPosition: 'top',
+        politeness: 'assertive',
+      });
+      this.router.navigate(['/']);
     }
   }
 }

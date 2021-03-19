@@ -14,7 +14,9 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit() {
     this.error = localStorage.getItem('error');
+
     localStorage.removeItem('error');
+
     this.restaSvc.getRestaurants().subscribe((restaurants) => {
       this.restaurantsList = restaurants;
     });

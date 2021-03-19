@@ -7,13 +7,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  isAdmin = true;
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      //console.log(params.get('isAdmin'));
-      this.isAdmin = params.get('isAdmin') === 'true';
-    });
-  }
+  ngOnInit(): void {}
 }

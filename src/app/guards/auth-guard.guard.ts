@@ -6,13 +6,14 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuardGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,11 +23,17 @@ export class AuthGuardGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (location.search.indexOf('isAdmin=true') > -1) {
-      console.log('ALlowed');
       return true;
     }
-    localStorage.setItem('error', 'NOt allowed');
-    this.router.navigate(['/']);
+    localStorage.setItem('error', 'Not allowed');
+    this.router.navigate(['/']).then((navigated: boolean) => {
+      if (navigated) {
+        this.snackBar.open('Only admins can edit menus', 'Ok', {
+          verticalPosition: 'top',
+          politeness: 'assertive',
+        });
+      }
+    });
     return false;
   }
 }

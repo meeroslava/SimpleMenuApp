@@ -18,14 +18,10 @@ export class RestaurantService {
   }
 
   public getRestaurantById(id: string): Observable<Restaurant> {
-    //console.log(id);
     return this.http.get<Restaurant>(`${this.restaUrl}/${id}`);
   }
 
   public updateRestaurant(id: string, data: any): Observable<any> {
-    console.log(arguments);
-    return this.http
-      .post(`${this.restaUrl}/${id}/post`, data)
-      .pipe(tap((x: any) => console.log(x)));
+    return this.http.post(`${this.restaUrl}/${id}/post`, data);
   }
 }

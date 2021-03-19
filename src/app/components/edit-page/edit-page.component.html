@@ -1,6 +1,8 @@
 <form [formGroup]="editForm" (ngSubmit)="onFormSubmit()">
   <mat-form-field>
+    <mat-label>Menu Name</mat-label>
     <input class="menuName" matInput formControlName="name" />
+    <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
   <div
     class="dish"
@@ -9,11 +11,15 @@
   >
     <div formGroupName="{{ i }}">
       <mat-form-field>
-        <input matInput formControlName="dish"
-      /></mat-form-field>
+        <mat-label>Dish</mat-label>
+        <input matInput formControlName="dish" />
+        <mat-icon matSuffix>mode_edit</mat-icon></mat-form-field
+      >
       <mat-form-field>
-        <input matInput formControlName="price"
-      /></mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" />
+        <mat-icon matSuffix>mode_edit</mat-icon></mat-form-field
+      >
     </div>
   </div>
   <button

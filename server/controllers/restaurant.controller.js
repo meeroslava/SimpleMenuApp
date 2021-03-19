@@ -14,7 +14,6 @@ exports.get = function (req, res) {
 };
 
 exports.list = function (req, res) {
-  //console.log(Restaurant.collection.collectionName);
   Restaurant.find({ "menu.details.1": { $exists: true } }) //get restaurants with menus
     .then(function (restaurants) {
       return res.status(200).json(restaurants);
@@ -29,23 +28,14 @@ exports.list = function (req, res) {
 
 exports.update = function (req, res) {
   const params = JSON.parse(JSON.stringify(req.body));
-  console.log("params", params);
   Restaurant.findByIdAndUpdate(
     req.params.id,
     { menu: params },
     { new: true },
-    function (err, results) {
-      console.log("Err", err);
-      console.log("results", results);
+    function (err) {
+      if (err) {
+        console.log("error: ", err);
+      }
     }
   );
-  // .then(function (restaurants) {
-  //   return res.json({ success: true });
-  // })
-  // .catch(function (err) {
-  //   return res.status(400).json({
-  //     status: 400,
-  //     message: err.message,
-  //   });
-  // });
 };

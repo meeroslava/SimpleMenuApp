@@ -10,23 +10,18 @@ import Restaurant from '../../models/restaurant.model';
 })
 export class DetailsPageComponent implements OnInit {
   isLoading: boolean = false;
-  isAdmin: boolean;
+  public error: string | null = null;
   restaurant!: Restaurant;
   displayedColumns: string[] = ['dish', 'price'];
 
   constructor(
     private route: ActivatedRoute,
     public restaSvc: RestaurantService
-  ) {
-    this.isAdmin = false;
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.error = localStorage.getItem('error'); //edit denied
     let restaurantId = this.route.snapshot.params['id'];
-
-    this.route.paramMap.subscribe((params) => {
-      this.isAdmin = params.get('isAdmin') === 'true';
-    });
 
     //get restaurant by id
     this.isLoading = true;
