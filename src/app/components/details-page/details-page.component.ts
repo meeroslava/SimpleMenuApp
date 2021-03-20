@@ -10,7 +10,7 @@ import Restaurant from '../../models/restaurant.model';
 })
 export class DetailsPageComponent implements OnInit {
   isLoading: boolean = false;
-  public error: string | null = null;
+  public showEdit: boolean = false;
   restaurant!: Restaurant;
   displayedColumns: string[] = ['dish', 'price'];
 
@@ -20,13 +20,17 @@ export class DetailsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.error = localStorage.getItem('error'); //edit denied
-    let restaurantId = this.route.snapshot.params['id'];
+    //indication of admin param
+    if (location.search.indexOf('isAdmin=true') > -1) {
+      this.showEdit = true;
+    }
+
+    let restaurantName = this.route.snapshot.params['name'];
+    this.isLoading = true;
 
     //get restaurant by id
-    this.isLoading = true;
     this.restaSvc
-      .getRestaurantById(restaurantId)
+      .getRestaurantByName(restaurantName)
       .subscribe((restaurant: Restaurant) => {
         this.restaurant = restaurant;
         this.isLoading = false;

@@ -17,11 +17,11 @@ export class RestaurantService {
     return this.http.get<Restaurant[]>(this.restaUrl);
   }
 
-  public getRestaurantById(id: string): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`${this.restaUrl}/${id}`);
+  public getRestaurantByName(name: string): Observable<Restaurant> {
+    return this.http.get<Restaurant>(`${this.restaUrl}/${name}`);
   }
 
-  public updateRestaurant(id: string, data: any): Observable<any> {
-    return this.http.post(`${this.restaUrl}/${id}/post`, data);
+  public updateRestaurant(name: string, data: any): Observable<any> {
+    return this.http.post(`${this.restaUrl}/${name}/post`, data);
   }
 }

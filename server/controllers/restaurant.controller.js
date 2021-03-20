@@ -1,7 +1,7 @@
 const Restaurant = require("../models/restaurant.model");
 
 exports.get = function (req, res) {
-  Restaurant.findById(req.params.id)
+  Restaurant.findOne({ name: req.params.name })
     .then(function (restaurant) {
       return res.status(200).json(restaurant);
     })
@@ -28,8 +28,8 @@ exports.list = function (req, res) {
 
 exports.update = function (req, res) {
   const params = JSON.parse(JSON.stringify(req.body));
-  Restaurant.findByIdAndUpdate(
-    req.params.id,
+  Restaurant.findOneAndUpdate(
+    { name: req.params.name },
     { menu: params },
     { new: true },
     function (err) {

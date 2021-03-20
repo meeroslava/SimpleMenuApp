@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use("/api", routes);
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist/SimpleMenuApp/index.html"));
+  res.sendFile(path.join(__dirname, "dist/index.html"));
 });
 
 mongoose.connect("mongodb://127.0.0.1:27017/menu-app");

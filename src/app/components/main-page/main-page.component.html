@@ -1,6 +1,6 @@
 <mat-selection-list [multiple]="false">
   <mat-list-option
-    [routerLink]="['/' + restaurant._id]"
+    [routerLink]="['/' + restaurant.name]"
     queryParamsHandling="merge"
     *ngFor="let restaurant of restaurantsList"
   >

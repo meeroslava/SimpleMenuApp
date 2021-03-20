@@ -26,11 +26,11 @@ import { AuthGuardGuard } from './guards/auth-guard.guard';
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
   {
-    path: ':id',
+    path: ':name',
     component: DetailsPageComponent,
   },
   {
-    path: ':id/edit',
+    path: ':name/edit',
     component: EditPageComponent,
     canActivate: [AuthGuardGuard],
   },

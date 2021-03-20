@@ -25,7 +25,7 @@ export class AuthGuardGuard implements CanActivate {
     if (location.search.indexOf('isAdmin=true') > -1) {
       return true;
     }
-    localStorage.setItem('error', 'Not allowed');
+
     this.router.navigate(['/']).then((navigated: boolean) => {
       if (navigated) {
         this.snackBar.open('Only admins can edit menus', 'Ok', {
