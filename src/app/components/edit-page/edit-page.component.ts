@@ -27,11 +27,11 @@ export class EditPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let restaurantId = this.route.snapshot.params['id'];
+    let restaurantName = this.route.snapshot.params['name'];
 
     //get restaurant by id
     this.restaSvc
-      .getRestaurantById(restaurantId)
+      .getRestaurantByName(restaurantName)
       .subscribe((restaurant: Restaurant) => {
         this.restaurant = restaurant;
         this.editForm.patchValue({ name: this.restaurant.menu.name }); //populate form
@@ -54,7 +54,7 @@ export class EditPageComponent implements OnInit {
     return formArray;
   }
 
-  //menu details for to show in form
+  //menu details to show in form
   get details(): FormArray {
     return this.editForm.get('details') as FormArray;
   }
@@ -65,7 +65,7 @@ export class EditPageComponent implements OnInit {
       }
       this.restaSvc
         .updateRestaurant(
-          this.route.snapshot.params['id'],
+          this.route.snapshot.params['name'],
           this.editForm.getRawValue()
         )
         .subscribe((result) => console.log(result.status));
